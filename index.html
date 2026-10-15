@@ -2,57 +2,290 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>VoxForge Gaming — PC Components & Games</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VoxForge Gaming — Enthusiast PC Components & Custom Rigs</title>
+  <meta name="description" content="Master-grade gaming hardware, custom rig configurator with real-time socket compatibility, and enthusiast PC components.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="promo-strip" role="region" aria-label="Promotional banner">
-    <div class="promo-track">
-      <div class="promo-content">🔥 FLASH SALE: 20% OFF ALL RAZER PERIPHERALS — ENDS IN 04:22:10</div>
+  <!-- Promotional Announcement Strip -->
+  <aside class="promo-strip" aria-label="Promotions and Flash Sales">
+    <div class="promo-inner container">
+      <div class="promo-tag">LIMITED EVENT</div>
+      <div class="promo-track" id="promoTrack">
+        <span class="promo-text">FLASH SALE: 20% OFF RAZER PERIPHERALS — CODE: <strong>VOX20</strong></span>
+        <span class="promo-divider" aria-hidden="true">•</span>
+        <span class="promo-text">FREE EXPEDITED SHIPPING ON RIGS OVER $1,200</span>
+      </div>
+      <div class="promo-meta">
+        <span class="countdown-label">ENDS IN</span>
+        <time class="countdown-display" id="flashTimer" datetime="PT4H22M10S">04:22:10</time>
+        <button type="button" class="promo-pause-btn" id="promoPauseBtn" aria-label="Pause promotion animation" aria-pressed="false">⏸</button>
+      </div>
     </div>
-  </div>
+  </aside>
+
+  <!-- Site Navigation -->
   <header class="site-header">
     <div class="container header-inner">
-      <div class="logo">VoxForge</div>
-      <nav class="nav">
-        <a href="#brands">Brands</a>
+      <a href="#" class="logo" aria-label="VoxForge Home">Vox<span>Forge</span></a>
+      <nav class="nav" aria-label="Main Navigation">
+        <a href="#builder">Rig Configurator</a>
+        <a href="#parts">Components</a>
+        <a href="#brands">Authorized Brands</a>
       </nav>
+      <div class="header-actions">
+        <button type="button" class="cart-trigger-btn" id="cartOpenBtn" aria-label="View shopping cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-text">Cart</span>
+          <span class="cart-count" id="headerCartCount" aria-label="0 items in cart">0</span>
+        </button>
+      </div>
     </div>
-  </header> 
+  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>Next-Gen PC Parts & Games</h1>
-        <p>High-performance components, curated for gamers and creators.</p>
+  <main id="main-content">
+    <!-- Hero Showcase Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <span class="badge hero-badge">Hardware Precision Lab</span>
+          <h1 id="hero-title">Forge Your Next <span class="neon-text">Battlestation</span></h1>
+          <p class="hero-subtext">Enterprise-grade thermal engineering, unlocked silicon, and curated parts guaranteed to sync without bottlenecks.</p>
+          <div class="hero-cta-group">
+            <a href="#builder" class="btn btn-primary">Launch Rig Builder</a>
+            <a href="#parts" class="btn btn-secondary">Browse All Parts</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-value">100%</span>
+              <span class="stat-desc">Socket Checked</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">48hr</span>
+              <span class="stat-desc">Stress Testing</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">3-Yr</span>
+              <span class="stat-desc">Hardware Warranty</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="brands" class="brands container">
-      <h2>Top Brands</h2>
-      <div class="brand-grid">
-        <div class="brand"><img class="brand-logo" src="assets/logos/razer.svg" alt="Razer logo"><span>Razer</span></div>
-        <div class="brand"><img class="brand-logo" src="assets/logos/steelseries.svg" alt="SteelSeries logo"><span>SteelSeries</span></div>
-        <div class="brand"><img class="brand-logo" src="assets/logos/skullcandy-1.svg" alt="Skullcandy logo"><span>Skullcandy</span></div>
-        <div class="brand"><img class="brand-logo" src="assets/logos/amd-logo-1.svg" alt="AMD logo"><span>AMD</span></div>
-        <div class="brand"><img class="brand-logo" src="assets/logos/nvidia.svg" alt="NVIDIA logo"><span>NVIDIA</span></div>
-        <div class="brand"><img class="brand-logo" src="assets/logos/corsair.svg" alt="Corsair logo"><span>Corsair</span></div>
+    <!-- Interactive PC Builder & Compatibility Inspector -->
+    <section id="builder" class="builder-section container" aria-labelledby="builder-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Architecture Inspector</span>
+        <h2 id="builder-title">Interactive Rig Configurator</h2>
+        <p>Select components with dynamic rule verification for sockets, power requirements, and motherboard chipset alignment.</p>
+      </div>
+
+      <div class="build-grid">
+        <form class="build-form" id="builderForm" novalidate>
+          <div class="builder-row">
+            <label for="selectCpu" class="builder-label">
+              <span class="label-name">Processor (CPU)</span>
+              <span class="label-spec" id="cpuSpecPreview">Select CPU</span>
+            </label>
+            <select id="selectCpu" class="builder-select" name="cpu">
+              <option value="">Choose a processor...</option>
+            </select>
+          </div>
+
+          <div class="builder-row">
+            <label for="selectMobo" class="builder-label">
+              <span class="label-name">Motherboard</span>
+              <span class="label-spec" id="moboSpecPreview">Select Motherboard</span>
+            </label>
+            <select id="selectMobo" class="builder-select" name="mobo">
+              <option value="">Choose a motherboard...</option>
+            </select>
+          </div>
+
+          <div class="builder-row">
+            <label for="selectGpu" class="builder-label">
+              <span class="label-name">Graphics Card (GPU)</span>
+              <span class="label-spec" id="gpuSpecPreview">Select GPU</span>
+            </label>
+            <select id="selectGpu" class="builder-select" name="gpu">
+              <option value="">Choose a graphics card...</option>
+            </select>
+          </div>
+
+          <div class="builder-row">
+            <label for="selectRam" class="builder-label">
+              <span class="label-name">Memory (RAM)</span>
+              <span class="label-spec" id="ramSpecPreview">Select RAM</span>
+            </label>
+            <select id="selectRam" class="builder-select" name="ram">
+              <option value="">Choose high-speed memory...</option>
+            </select>
+          </div>
+        </form>
+
+        <!-- Builder Diagnostics Card -->
+        <aside class="build-inspector" aria-label="System Diagnostics">
+          <h3 class="inspector-title">System Diagnostics</h3>
+          <div class="telemetry-box" id="builderTelemetry">
+            <div class="telemetry-metric">
+              <span class="metric-name">Estimated Draw:</span>
+              <span class="metric-val" id="telemetryTdp">0 W</span>
+            </div>
+            <div class="telemetry-metric">
+              <span class="metric-name">Rec. Power Supply:</span>
+              <span class="metric-val" id="telemetryPsu">500 W</span>
+            </div>
+            <div class="telemetry-metric">
+              <span class="metric-name">Config Total:</span>
+              <span class="metric-val total-cost" id="telemetryTotal">$0.00</span>
+            </div>
+          </div>
+
+          <div class="compatibility-banner" id="compatibilityStatus" role="status" aria-live="polite">
+            <div class="status-indicator status-idle"></div>
+            <div class="status-copy">
+              <strong>Select components</strong> to verify hardware compatibility rules.
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-block" id="addBuildToCartBtn" disabled>
+            Add Full Rig to Cart
+          </button>
+        </aside>
       </div>
     </section>
-    <!-- Parts & Accessories (demo hardcoded list) -->
-    <section id="parts" class="container products">
-      <h2>Parts & Accessories</h2>
+
+    <!-- Component Catalog & Recommendations -->
+    <section id="parts" class="container catalog-section" aria-labelledby="catalog-title">
+      <div class="section-header catalog-header">
+        <div>
+          <span class="section-eyebrow">Inventory Lab</span>
+          <h2 id="catalog-title">Enthusiast Components & Gear</h2>
+        </div>
+        <div class="catalog-filters" role="group" aria-label="Filter Components by Category">
+          <button type="button" class="filter-chip active" data-filter="all">All</button>
+          <button type="button" class="filter-chip" data-filter="gpu">GPUs</button>
+          <button type="button" class="filter-chip" data-filter="cpu">CPUs</button>
+          <button type="button" class="filter-chip" data-filter="peripherals">Peripherals</button>
+          <button type="button" class="filter-chip" data-filter="displays">Monitors</button>
+        </div>
+      </div>
+
       <div class="product-grid" id="demoPartsGrid">
-        <!-- Demo parts populated by script -->
+        <!-- Rendered by script.js -->
       </div>
     </section>
 
+    <!-- Dynamic Smart Recommendations -->
+    <section class="container rec-section" id="recommendationsSection" aria-labelledby="rec-title">
+      <div class="rec-card">
+        <div class="rec-icon" aria-hidden="true">💡</div>
+        <div class="rec-body">
+          <h3 id="rec-title">Curated Complementary Additions</h3>
+          <p id="recDescription">Add components to your cart to trigger tailor-made subsystem recommendations.</p>
+        </div>
+        <div class="rec-items-shelf" id="recItemsShelf">
+          <!-- Dynamically populated based on active cart contents -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Authorized Manufacturer Partners -->
+    <section id="brands" class="brands-section container" aria-labelledby="brands-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Authorized Distribution</span>
+        <h2 id="brands-title">Official Factory Partners</h2>
+      </div>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <img class="brand-logo" src="assets/logos/razer.svg" alt="Razer" width="46" height="46" loading="lazy">
+          <span>Razer</span>
+        </div>
+        <div class="brand-card">
+          <img class="brand-logo" src="assets/logos/steelseries.svg" alt="SteelSeries" width="46" height="46" loading="lazy">
+          <span>SteelSeries</span>
+        </div>
+        <div class="brand-card">
+          <img class="brand-logo" src="assets/logos/skullcandy-1.svg" alt="Skullcandy" width="46" height="46" loading="lazy">
+          <span>Skullcandy</span>
+        </div>
+        <div class="brand-card">
+          <img class="brand-logo" src="assets/logos/amd-logo-1.svg" alt="AMD" width="46" height="46" loading="lazy">
+          <span>AMD</span>
+        </div>
+        <div class="brand-card">
+          <img class="brand-logo" src="assets/logos/nvidia.svg" alt="NVIDIA" width="46" height="46" loading="lazy">
+          <span>NVIDIA</span>
+        </div>
+        <div class="brand-card">
+          <img class="brand-logo" src="assets/logos/corsair.svg" alt="Corsair" width="46" height="46" loading="lazy">
+          <span>Corsair</span>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Slide-out Shopping Cart Drawer -->
+  <div class="cart-backdrop" id="cartBackdrop" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle" hidden>
+    <div class="cart-drawer-header">
+      <h2 id="cartDrawerTitle">Review Order</h2>
+      <button type="button" class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart drawer">&times;</button>
+    </div>
+
+    <div class="cart-drawer-body">
+      <div class="cart-empty-message" id="cartEmptyState">
+        <p>Your hardware cache is currently empty.</p>
+        <a href="#parts" class="btn btn-secondary btn-sm" id="cartShopNowBtn">Browse Gear</a>
+      </div>
+      <ul class="cart-item-list" id="cartItemList" aria-label="Cart Items">
+        <!-- Rendered dynamically -->
+      </ul>
+    </div>
+
+    <div class="cart-drawer-footer" id="cartFooter">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span class="cart-summary-val" id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row subtle">
+        <span>Estimated Freight</span>
+        <span class="cart-summary-val" id="cartFreight">Calculated at Step 2</span>
+      </div>
+      <div class="cart-summary-row total-highlight">
+        <span>Estimated Total</span>
+        <span class="cart-summary-val" id="cartGrandTotal">$0.00</span>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">
+        Proceed to Secure Checkout
+      </button>
+      <button type="button" class="btn-text-destructive" id="clearCartBtn">Clear Cache</button>
+    </div>
+  </aside>
+
+  <!-- Notification Toast -->
+  <div class="toast-region" aria-live="polite" aria-atomic="true" id="toastContainer"></div>
+
+  <!-- Site Footer -->
   <footer class="site-footer">
-    <div class="container">© 2026 VoxForge — Built for gamers</div>
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="logo">Vox<span>Forge</span></div>
+        <p>Master-grade gaming hardware, custom rig configurators, and component benchmarking.</p>
+      </div>
+      <div class="footer-meta">
+        <p>&copy; 2026 VoxForge Inc. Engineered for gaming performance and reliability.</p>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>
